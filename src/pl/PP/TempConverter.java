@@ -45,6 +45,6 @@ public class TempConverter { // Nazwa klasy
                     fahrenheit, celsius, kelvin);
         }
 
-        scanner.close(); 
+        scanner.close();
     }
 }
