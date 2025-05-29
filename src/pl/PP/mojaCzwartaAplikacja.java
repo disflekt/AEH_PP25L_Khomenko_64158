@@ -20,7 +20,6 @@ public class mojaCzwartaAplikacja {
                 break;
             }
 
-
             long sum = 0;
             for (int i = lowerLimit; i <= upperLimit; i++) {
                 sum += (long) i * i;

@@ -89,6 +89,7 @@ public class CalculatorMenu {
                     }
                     break;
             }
+
             System.out.println();
             scanner.nextLine();
         }
