@@ -95,6 +95,6 @@ public class CalculatorMenu {
         }
 
         scanner.close();
-        
+
     }
 }
