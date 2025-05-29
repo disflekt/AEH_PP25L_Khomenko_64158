@@ -8,7 +8,6 @@ public class mojaCzwartaAplikacja {
 
         Scanner scanner = new Scanner(System.in);
 
-
         while (true) {
             System.out.print("Enter lower and upper integer limits: ");
 
