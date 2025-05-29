@@ -11,7 +11,6 @@ public class mojaCzwartaAplikacja {
         while (true) {
             System.out.print("Enter lower and upper integer limits: ");
 
-
             int lowerLimit = scanner.nextInt();
             int upperLimit = scanner.nextInt();
 
