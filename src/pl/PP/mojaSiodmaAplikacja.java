@@ -104,6 +104,7 @@ public class mojaSiodmaAplikacja {
         System.out.println("=== TESTOWANIE NOWYCH METOD (getters/setters) ===");
 
 
+
         System.out.println("--- Test metod dla adresu ---");
         System.out.println("Aktualny adres osoby 1: " + person1.getAddress());
         person1.setAddress("ul. Nowa 99, Poznań");
