@@ -2,7 +2,7 @@ package pl.PP;
 
 import java.util.Scanner;
 
-public class mojaCzwartaAplikacja {
+    public class mojaCzwartaAplikacja {
 
     public static void main(String[] args) {
 
@@ -24,7 +24,6 @@ public class mojaCzwartaAplikacja {
             for (int i = lowerLimit; i <= upperLimit; i++) {
                 sum += (long) i * i;
             }
-
 
             System.out.println("The sums of the squares from " + (lowerLimit * lowerLimit)
                     + " to " + (upperLimit * upperLimit)
