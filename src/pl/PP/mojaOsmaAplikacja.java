@@ -2,6 +2,7 @@ package pl.PP;
 import pl.PP.Konto ;
 
 public class mojaOsmaAplikacja {
+
     public static void main(String[] args) {
 
         Konto konto1 = new Konto();

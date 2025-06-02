@@ -84,7 +84,7 @@ public class Konto {
         }
     }
 
-
+    
     public void wyplac(double kwota) {
         if (kwota > 0 && kwota <= this.kwotaPieniedzy) {
             this.kwotaPieniedzy -= kwota;
