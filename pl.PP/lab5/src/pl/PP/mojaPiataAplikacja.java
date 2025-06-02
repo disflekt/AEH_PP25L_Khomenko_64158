@@ -10,7 +10,7 @@ public class mojaPiataAplikacja {
         displayPattern("*", 5, 3);
 
         System.out.println(); // Pusta linia dla separacji
-
+        
         // Drugie wywołanie
         displayPattern("#", 8, 4);
 
@@ -20,12 +20,7 @@ public class mojaPiataAplikacja {
         displayPattern("@", 10, 2);
     }
 
-    /**
-     * Metoda wyświetlająca wzór na konsoli
-     * @param znak - znak do wyświetlenia
-     * @param liczbaZnakow - liczba znaków w każdej linii (liczba całkowita)
-     * @param liczbLinii - liczba linii do wyświetlenia
-     */
+
     private static void displayPattern(String znak, int liczbaZnakow, int liczbLinii) {
         System.out.println("Wyświetlam wzór ze znakiem: " + znak);
         System.out.println("Liczba znaków w linii: " + liczbaZnakow);
