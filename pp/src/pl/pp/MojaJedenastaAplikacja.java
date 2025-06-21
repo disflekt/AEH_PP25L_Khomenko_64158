@@ -1,15 +1,37 @@
 package pl.pp;
+import java.util.*;
 
-public class MojaDziesiataAplikacja {
+public class MojaJedenastaAplikacja {
     public static void main(String[] args) {
-        int[] input = {0};
-        int[] result = countAndSumElements(input);
+        List<Student> students = Arrays.asList(
+                new Student("12345", "Jan", "Kowalski", Arrays.asList(4, 5, 3, 5)),
+                new Student("67890", "Anna", "Nowak", Arrays.asList(5, 5, 4, 4)),
+                new Student("54321", "Paweł", "Wiśniewski", Arrays.asList(2, 3, 2, 4)),
+                new Student("09876", "Katarzyna", "Kowalczyk", Arrays.asList(5, 4, 4, 5))
+        );
 
-        if (result.length == 0) {
-            System.out.println("Pusta tablica");
-        } else {
-            System.out.println("Liczba ujemnych: " + result[0] + " \nSuma dodatnich: " + result[1]);
+        Student topStudent = students.stream()
+                .max(Comparator.comparingDouble(Student::getAverage))
+                .orElse(null);
+
+        System.out.println("Student z najwyższą średnią: " + topStudent);
+
+        students.sort(Comparator.comparing(Student::getLastName));
+
+        System.out.println("Studenci posortowani według nazwisk:");
+        for (Student student : students) {
+            System.out.println(student);
         }
+
+//        int[] input = {0};
+//            int[] result = countAndSumElements(input);
+//
+//                if (result.length == 0) {
+//                System.out.println("Pusta tablica");
+//            } else {
+//                System.out.println("Liczba ujemnych: " + result[0] + " \nSuma dodatnich: " + result[1]);
+//            }
+
 //        // Deklaracje tablic - przykładowo
 //        int[] a = new int[100]; // tablica int o nazwie a zawierająca 100 elementów
 //        long b[] = new long[10]; // tablica long o nazwie b zawierająca 10 elementów
@@ -133,22 +155,22 @@ public class MojaDziesiataAplikacja {
 //        System.out.println("Liczba elementów: " + map1.size());
     }
 
-    public static int[] countAndSumElements(int[] input) {
-        if (input == null || input.length == 0) {
-            return new int[0];
-        }
-
-        int negativeCount = 0;
-        int positiveSum = 0;
-
-        for (int num : input) {
-            if (num < 0) {
-                negativeCount++;
-            } else if (num > 0) {
-                positiveSum += num;
-            }
-        }
-
-        return new int[]{negativeCount, positiveSum};
-    }
+//    public static int[] countAndSumElements(int[] input) {
+//        if (input == null || input.length == 0) {
+//            return new int[0];
+//        }
+//
+//        int negativeCount = 0;
+//        int positiveSum = 0;
+//
+//        for (int num : input) {
+//            if (num < 0) {
+//                negativeCount++;
+//            } else if (num > 0) {
+//                positiveSum += num;
+//            }
+//        }
+//
+//        return new int[]{negativeCount, positiveSum};
+//    }
 }
