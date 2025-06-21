@@ -5,6 +5,7 @@ public abstract class Account {
     protected String ownerName;
     protected double balance;
 
+
     public Account(String accountNumber, String ownerName, double initialBalance) {
         this.accountNumber = accountNumber;
         this.ownerName = ownerName;

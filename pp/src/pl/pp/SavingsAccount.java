@@ -16,6 +16,7 @@ public class SavingsAccount extends Account {
             return;
         }
 
+
         if (balance >= amount) {
             balance -= amount;
             System.out.printf("Счет %s: Снято %.2f. Новый баланс: %.2f%n", accountNumber, amount, balance);
