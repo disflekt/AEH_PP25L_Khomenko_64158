@@ -1,54 +1,89 @@
 package pl.pp;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileReader;
+
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class MojaDwunastaAplikacja {
-    public static void main(String[] args) {
-        String userDirectory = System.getProperty("user.dir");
-        System.out.println("Bieżący katalog to:");
-        System.out.println(userDirectory);
 
+public class MojaTrzynastaAplikacja {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Path inputPath;
+        Path outputPath;
+
 
         while (true) {
             System.out.print("Podaj ścieżkę do pliku wejściowego: ");
             String inputFilePath = scanner.nextLine();
             inputPath = Paths.get(inputFilePath);
 
+
+            if (!inputPath.isAbsolute()) {
+                inputPath = Paths.get(System.getProperty("user.dir")).resolve(inputPath);
+            }
+
             if (Files.exists(inputPath) && Files.isRegularFile(inputPath)) {
                 break;
             } else {
-                System.out.println("Plik nie istnieje. Spróbuj ponownie.");
+                System.out.println("Plik nie istnieje lub nie jest plikiem. Spróbuj ponownie.");
             }
         }
 
+
         System.out.print("Podaj ścieżkę do pliku wyjściowego: ");
         String outputFilePath = scanner.nextLine();
-        Path outputPath = Paths.get(outputFilePath);
-
-        long lineCount = 0;
-
-        try {
-            lineCount = Files.lines(inputPath).count();
-            System.out.println("Plik: " + inputPath.getFileName());
-            System.out.println("Liczba linii: " + lineCount);
-            String result = "Nazwa pliku: " + inputPath.getFileName() + System.lineSeparator() +
-                    "Liczba linii: " + lineCount;
-            Files.write(outputPath, result.getBytes(Charset.defaultCharset()));
-            System.out.println("Zapisano wynik do pliku: " + outputPath);
-
-        } catch (IOException e) {
-            System.out.println("Wystąpił błąd podczas odczytu/zapisu: " + e.getMessage());
+        outputPath = Paths.get(outputFilePath);
+        if (!outputPath.isAbsolute()) {
+            outputPath = Paths.get(System.getProperty("user.dir")).resolve(outputPath);
         }
 
+        try {
+
+            String content = Files.readString(inputPath, StandardCharsets.UTF_8);
+
+            String[] words = content.split("\\s+");
+            int wordCount = 0;
+
+            Map<String, Integer> wordFrequency = new TreeMap<>();
+
+            for (String word : words) {
+
+                String cleanedWord = word.replaceAll("[^\\p{L}\\p{Nd}]", "").toLowerCase();
+
+                if (!cleanedWord.isEmpty()) {
+                    wordFrequency.put(cleanedWord, wordFrequency.getOrDefault(cleanedWord, 0) + 1);
+                    wordCount++;
+                }
+            }
+
+
+            System.out.println("\n--- Wyniki analizy ---");
+            System.out.println("Liczba wszystkich słów: " + wordCount);
+            System.out.println("Częstotliwość występowania słów:");
+            for (Map.Entry<String, Integer> entry : wordFrequency.entrySet()) {
+                System.out.printf("%s: %d%n", entry.getKey(), entry.getValue());
+            }
+
+
+            List<String> outputLines = new ArrayList<>();
+            outputLines.add("Nazwa pliku: " + inputPath.getFileName());
+            outputLines.add("Liczba wszystkich słów: " + wordCount);
+            outputLines.add("-------------------------");
+            outputLines.add("Częstotliwość występowania słów:");
+            for (Map.Entry<String, Integer> entry : wordFrequency.entrySet()) {
+                outputLines.add(entry.getKey() + ": " + entry.getValue());
+            }
+
+            Files.write(outputPath, outputLines, StandardCharsets.UTF_8);
+            System.out.println("\nWyniki zapisano pomyślnie do pliku: " + outputPath.toAbsolutePath());
+
+        } catch (IOException e) {
+            System.out.println("Błąd podczas przetwarzania pliku: " + e.getMessage());
+        }
+        //        // składnia try - catch - finally (obsługa błędów: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch?retiredLocale=pl)
 //        try {
 //
 //            byte[] bytes = Files.readAllBytes(pathToFile);
@@ -57,13 +92,13 @@ public class MojaDwunastaAplikacja {
 //            System.out.println("Zawartość pliku to: ");
 //            System.out.println(fileContent);
 //
-//
+//            // można coś dopisać do pliku (za każdym uruchomieniem programu będzie dopisywane to, co niżej
 //            fileContent += " więcej tekstu ..."; // dopisujemy coś do pliku
 //            fileContent += " jeszcze więcej tekstu ..."; // dopisujemy coś do pliku
 //
 //            Files.write(pathToFile, fileContent.getBytes(Charset.defaultCharset()));
 //
-//
+//            // Plik można też wczytać jako listę linii tekstu
 //            List<String> lines = Files.readAllLines(pathToFile);
 //
 //            System.out.println("Aktualna zawartość pliku: ");
@@ -73,7 +108,9 @@ public class MojaDwunastaAplikacja {
 //
 //            Files.write(pathToFile, lines);
 //
-//
+//            // POWYŻSZE METODY MAJĄ PODSTAWOWĄ WADĘ - WCZYTUJĄ CAŁY PLIK DO PAMIĘCI RAM (w skrócie - przy dużych plikach można zawiesić system)
+//            // DLATEGO KORZYSTA SIĘ Z NISKOPOZIOMOWYCH FUNKCJI ODCZYTU: FileInputStream, FileReader (odczytywanie bajtów, znak po znaku)
+//            // ORAZ BufferedReader, Scanner (odczytywanie całych linii lub słów)
 //
 //            String path = "sample_text.txt";
 //            System.out.println("Przykład nr 1 - FileInputStream");
@@ -127,12 +164,11 @@ public class MojaDwunastaAplikacja {
 //
 //
 //        } catch (Exception e){
-//
+//            // ten kod zadziała tylko gdy pojawi się wyjątek
 //            System.out.println("Dostaliśmy błąd obsługi pliku: " + e.getMessage());
 //        } finally {
-//
+//            // tutaj robimy coś na koniec
 //        }
-
     }
 
 
