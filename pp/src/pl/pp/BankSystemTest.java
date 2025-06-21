@@ -21,6 +21,7 @@ public class BankSystemTest {
             System.out.println();
         }
 
+
         System.out.println("\n--- Проводим операции ---");
 
 

@@ -1,6 +1,5 @@
 package pl.pp;
 
-
 public class CheckingAccount extends Account {
     private double overdraftLimit;
 

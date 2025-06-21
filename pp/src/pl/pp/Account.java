@@ -1,5 +1,6 @@
 package pl.pp;
 
+
 public abstract class Account {
     protected String accountNumber;
     protected String ownerName;
