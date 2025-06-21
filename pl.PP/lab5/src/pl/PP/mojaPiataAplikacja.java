@@ -10,7 +10,7 @@ public class mojaPiataAplikacja {
         displayPattern("*", 5, 3);
 
         System.out.println(); // Pusta linia dla separacji
-        
+
         // Drugie wywołanie
         displayPattern("#", 8, 4);
 
